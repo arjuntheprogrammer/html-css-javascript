@@ -1,0 +1,98 @@
+@import url(https://fonts.googleapis.com/css?family=Nova+Oval);
+body {
+    font-family: "Nova Oval"
+}
+
+#hero_div {
+    color: rgb(200, 30, 30);
+    top: 120px;
+    left: 120px;
+    background-color: rgb(10, 110, 1120)
+}
+
+.person::before {
+    border: 5px solid rgb(0, 0, 1);
+    position: absolute;
+    top: -9;
+    left: 0;
+    border: 1px solid rgb(0, 0, 1);
+    height: 10px;
+    width: 10px;
+    content: "";
+    display: block;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    background-color: grey;
+    border-bottom: 0px;
+}
+
+.person::after {
+    border: 5px solid rgb(0, 0, 1);
+    position: absolute;
+    top: -9;
+    right: 0;
+    border: 1px solid rgb(0, 0, 1);
+    height: 10px;
+    width: 10px;
+    content: "";
+    display: block;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    background-color: grey;
+    border-bottom: 0px;
+}
+
+.person {
+    transition: all 2s;
+    border: 1px solid rgb(200, 200, 200);
+    width: 42px;
+    height: 64px;
+    text-align: center;
+    line-height: 64px;
+    position: absolute;
+}
+
+.collectable {
+    height: 6px;
+    width: 6px;
+    /*border: 2px solid rgba(20, 20, 180, .6);*/
+    background-color: rgba(200, 10, 10, .9);
+    /*border-radius: 6px;*/
+    position: absolute;
+    top: 200px;
+    left: 200px;
+    /*position: absolute;*/
+    -moz-animation: spin 4s linear infinite;
+}
+
+@-moz-keyframes spin {
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+.collectable::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right: 6px solid rgba(200, 10, 19, .9);
+}
+
+.collectable::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right: 6px solid rgba(200, 10, 19, .9);
+}
