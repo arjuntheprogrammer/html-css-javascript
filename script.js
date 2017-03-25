@@ -10,7 +10,7 @@ $(document).ready(function() {
 
     });
     world.people = [];
-    world.collectable = []
+    world.collectable = [];
     world.people.push({ el: $("#extra1"), top: 0, left: 0, directionX: 1, directionY: 1 });
     world.people.push({ el: $("#extra2"), top: 0, left: 500, directionX: 1, directionY: 1 });
     world.people.push({ el: $("#extra3"), top: 100, left: 0, directionX: 1, directionY: 1 });
@@ -21,7 +21,7 @@ $(document).ready(function() {
 });
 
 function createCollectables(num) {
-    for (var i = 0; i <= num; i++) {
+    for (var i = 0; i < num; i++) {
         $("body").append("<div id ='collectable" + i + "' class = 'collectable'></div>");
 
         var top = Math.random() * 340;
@@ -29,7 +29,7 @@ function createCollectables(num) {
         $("#collectable" + i).css("left", left + "px");
         $("#collectable" + i).css("top", top + "px");
 
-        world.collectable.push({ el: $("collectable" + i), top: top, left: left });
+        world.collectable.push({ el: $("collectable" + i), top: top, left: left, visibility: "visible" });
 
     }
 }
@@ -52,6 +52,8 @@ function movePeople() {
 
         }
 
+        checkCollectableCollision(person);
+
         //console.log(person.top, person.left);
         if (Math.random() > .95) {
             person.directionY = -person.directionY;
@@ -71,14 +73,14 @@ function movePeople() {
         if (person.top > 640) {
             person.top = 640;
         }
-        // if (checkCollision(person, num)) {
+        if (checkCollision(person, num)) {
 
-        //     console.log("here");
-        //     //world.people[other].top -= 20;
-        //     person.top += personHeight;
-        //     //world.people[other].left -= 20;
-        //     person.left += personWidth;
-        // }
+            console.log("here");
+            //world.people[other].top -= 20;
+            person.top += personHeight;
+            //world.people[other].left -= 20;
+            person.left += personWidth;
+        }
 
         //console.log(person.top, person.left, "\n\n");
         person.el.css("top", person.top + "px");
@@ -87,7 +89,7 @@ function movePeople() {
         //console.log(world);
 
     }
-    setTimeout(movePeople, 10);
+    setTimeout(movePeople, 100);
 
 
 }
@@ -102,5 +104,28 @@ function checkCollision(person, num) {
             return true;
         }
         return false;
+    }
+}
+
+function checkCollectableCollision(person) {
+    for (item in world.collectable) {
+        var checkItem = world.collectable[item];
+
+
+        if (checkItem != null && checkItem.top <= personHeight + person.top &&
+            checkItem.top + personHeight >= person.top &&
+            checkItem.left + personWidth >= person.left &&
+            checkItem.left <= personWidth + person.left) {
+
+            person.el.append("<div class='collected_item'></div>");
+            $("#collectable" + item).css("visibility", "hidden");
+            //console.log(checkItem.visibility);
+            //delete checkItem;
+            checkItem = null;
+            console.log("\n\n");
+
+
+        }
+
     }
 }
